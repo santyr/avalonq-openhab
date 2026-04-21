@@ -10,6 +10,7 @@ It does not require MQTT.
 
 - `examples/openhab/avalonq.items`
 - `examples/openhab/avalonq.js`
+- `examples/openhab/avalonq-voltage-protection.js`
 
 ## What it does
 
@@ -27,8 +28,8 @@ It does not require MQTT.
   - fan speed
   - LCD
 - supports battery/charger-based load management:
-  - power on/off via external relay item
   - standby / wake via miner API
+  - optional power on/off via external relay item
   - workmode selection based on battery SoC and charger state
 
 ## Why this design
@@ -67,6 +68,12 @@ Contains:
 - manual command rules
 - battery/charger load-management rule
 
+### `examples/openhab/avalonq-voltage-protection.js`
+Contains:
+- a dedicated low-voltage protection rule for the Avalon path
+- preferred behavior of entering standby via the Avalon API
+- optional AC relay-off fallback if you decide hard power-off is needed later
+
 ## Install outline
 
 1. Copy `examples/openhab/avalonq.items` into your openHAB items directory.
@@ -98,7 +105,8 @@ Recommended approach for this environment:
 - create a separate smart-plug Thing and linked Item for the Avalon, e.g. `AvalonQ_Miner1_PowerRelay`
 - keep Avalon telemetry/control items under the `AvalonQ_Miner1_` prefix
 - reuse `BatterySoC_Calculated` and `BatteryChargingStatus` as shared upstream power-state inputs
-- if desired, clone the low-voltage protection concept into a dedicated Avalon rule instead of sharing the existing miner rule
+- prefer putting the Avalon into standby via its API instead of hard power-off
+- if desired, use a dedicated Avalon voltage-protection rule with optional relay-off fallback instead of sharing the existing miner rule
 
 ## Battery / charger automation
 

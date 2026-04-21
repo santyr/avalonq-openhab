@@ -51,6 +51,11 @@ const CFG = {
   // Enable relay control if the miner is physically powered by a smart relay.
   usePowerRelay: true,
 
+  // Preferred stop behavior:
+  // - false: keep AC power on and use the Avalon API to enter standby
+  // - true: after entering standby, also cut AC power via the relay
+  powerOffWhenStopped: false,
+
   // SoC policy
   socStopThreshold: 35,
   socEcoThreshold: 55,
@@ -399,7 +404,7 @@ function evaluateLoadManagement() {
       if (desiredMode !== 'Standby') setWorkmode(desiredMode);
     } else {
       setStandby(true);
-      if (CFG.usePowerRelay) safeSendCommand(CFG.powerRelayItem, 'OFF');
+      if (CFG.usePowerRelay && CFG.powerOffWhenStopped) safeSendCommand(CFG.powerRelayItem, 'OFF');
     }
   } catch (e) {
     console.warn(`AvalonQ load management action failed: ${e}`);

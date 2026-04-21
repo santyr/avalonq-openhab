@@ -56,6 +56,10 @@ const CFG = {
   // - true: after entering standby, also cut AC power via the relay
   powerOffWhenStopped: false,
 
+  // If false, highest automatic mode is Standard.
+  // Keep false for now to stay within a 15A circuit; revisit in winter if needed.
+  allowSuperMode: false,
+
   // SoC policy
   socStopThreshold: 35,
   socEcoThreshold: 55,
@@ -378,7 +382,7 @@ function setFanSpeed(percent) {
 
 function desiredWorkmodeFromSoc(soc, chargerActive) {
   if (!chargerActive && !CFG.allowMiningWithoutCharger) return 'Standby';
-  if (soc >= CFG.socSuperThreshold && chargerActive) return 'Super';
+  if (CFG.allowSuperMode && soc >= CFG.socSuperThreshold && chargerActive) return 'Super';
   if (soc >= CFG.socStandardThreshold) return 'Standard';
   if (soc >= CFG.socEcoThreshold) return 'Eco';
   return 'Standby';

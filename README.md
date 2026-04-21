@@ -31,6 +31,7 @@ It does not require MQTT.
   - standby / wake via miner API
   - optional power on/off via external relay item
   - workmode selection based on battery SoC and charger state
+  - defaults to Eco/Standard automation only; Super is disabled by default for a 15A circuit
 
 ## Why this design
 
@@ -107,6 +108,15 @@ Recommended approach for this environment:
 - reuse `BatterySoC_Calculated` and `BatteryChargingStatus` as shared upstream power-state inputs
 - prefer putting the Avalon into standby via its API instead of hard power-off
 - if desired, use a dedicated Avalon voltage-protection rule with optional relay-off fallback instead of sharing the existing miner rule
+- keep `allowSuperMode: false` for now so automatic control only chooses Eco or Standard on the current 15A circuit
+
+## Pre-created placeholder deployment
+
+The live openHAB instance can safely pre-create the Avalon model before hardware arrival:
+- create the `AvalonQ_Miner1` equipment group and child items now
+- create disabled placeholder rules now
+- leave `AvalonQ_Miner1_LoadManagement_Enable` OFF until the miner is on-site and validated
+- later, replace the disabled placeholders with the real script-backed deployment from this repo and wire the relay item to the actual Avalon smart plug Thing
 
 ## Battery / charger automation
 

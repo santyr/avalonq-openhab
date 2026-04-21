@@ -1,0 +1,82 @@
+// Example openHAB Items for a direct Avalon Q integration.
+//
+// Adjust the prefix and labels as needed. The JS rule file assumes the
+// prefix `AvalonQ_Miner1_`.
+
+Group gAvalonQ_Miner1 "Avalon Q Miner 1"
+
+// -----------------------------------------------------------------------------
+// Availability and mode/state
+// -----------------------------------------------------------------------------
+
+String AvalonQ_Miner1_Availability      "Availability [%s]"                 <network>      (gAvalonQ_Miner1)
+String AvalonQ_Miner1_SystemStatus      "System Status [%s]"                <status>       (gAvalonQ_Miner1)
+String AvalonQ_Miner1_Workmode          "Workmode [%s]"                     <settings>     (gAvalonQ_Miner1)
+Switch AvalonQ_Miner1_PoolOnline        "Pool Online"                       <network>      (gAvalonQ_Miner1)
+Switch AvalonQ_Miner1_LCD               "LCD On"                            <screen>       (gAvalonQ_Miner1)
+Switch AvalonQ_Miner1_StandbyState      "Standby Active"                    <switch>       (gAvalonQ_Miner1)
+
+// -----------------------------------------------------------------------------
+// Metrics
+// -----------------------------------------------------------------------------
+
+Number:Power           AvalonQ_Miner1_PowerW           "Power [%.0f W]"                  <energy>       (gAvalonQ_Miner1)
+Number                 AvalonQ_Miner1_HashrateTHS      "Hashrate [%.2f TH/s]"            <line>         (gAvalonQ_Miner1)
+Number                 AvalonQ_Miner1_EfficiencyJTH    "Efficiency [%.2f J/TH]"          <energy>       (gAvalonQ_Miner1)
+Number:Temperature     AvalonQ_Miner1_InternalTemp     "Internal Temp [%.1f °C]"         <temperature>  (gAvalonQ_Miner1)
+Number:Temperature     AvalonQ_Miner1_InletTemp        "Inlet Temp [%.1f °C]"            <temperature>  (gAvalonQ_Miner1)
+Number:Temperature     AvalonQ_Miner1_OutletTemp       "Outlet Temp [%.1f °C]"           <temperature>  (gAvalonQ_Miner1)
+Number:Temperature     AvalonQ_Miner1_AvgChipTemp      "Average Chip Temp [%.1f °C]"     <temperature>  (gAvalonQ_Miner1)
+Number:Temperature     AvalonQ_Miner1_MaxChipTemp      "Max Chip Temp [%.1f °C]"         <temperature>  (gAvalonQ_Miner1)
+Number                 AvalonQ_Miner1_Fan1RPM          "Fan 1 [%.0f rpm]"                <fan>          (gAvalonQ_Miner1)
+Number                 AvalonQ_Miner1_Fan2RPM          "Fan 2 [%.0f rpm]"                <fan>          (gAvalonQ_Miner1)
+Number                 AvalonQ_Miner1_Fan3RPM          "Fan 3 [%.0f rpm]"                <fan>          (gAvalonQ_Miner1)
+Number                 AvalonQ_Miner1_Fan4RPM          "Fan 4 [%.0f rpm]"                <fan>          (gAvalonQ_Miner1)
+Number:Time            AvalonQ_Miner1_PingMS           "Pool Ping [%.0f ms]"             <time>         (gAvalonQ_Miner1)
+Number                 AvalonQ_Miner1_AcceptedShares   "Accepted Shares [%.0f]"          <chart>        (gAvalonQ_Miner1)
+Number                 AvalonQ_Miner1_RejectedShares   "Rejected Shares [%.0f]"          <chart>        (gAvalonQ_Miner1)
+Number                 AvalonQ_Miner1_HardwareErrors   "Hardware Errors [%.0f]"          <error>        (gAvalonQ_Miner1)
+Number:Dimensionless   AvalonQ_Miner1_RejectionRate    "Rejection Rate [%.2f %%]"        <chart>        (gAvalonQ_Miner1)
+Number:Time            AvalonQ_Miner1_UptimeSeconds    "Uptime [%.0f s]"                 <time>         (gAvalonQ_Miner1)
+
+// -----------------------------------------------------------------------------
+// Info
+// -----------------------------------------------------------------------------
+
+String AvalonQ_Miner1_Firmware          "Firmware [%s]"                     <text>         (gAvalonQ_Miner1)
+String AvalonQ_Miner1_APIVersion        "API Version [%s]"                  <text>         (gAvalonQ_Miner1)
+String AvalonQ_Miner1_CGMinerVersion    "CGMiner Version [%s]"              <text>         (gAvalonQ_Miner1)
+String AvalonQ_Miner1_Model             "Model [%s]"                        <text>         (gAvalonQ_Miner1)
+String AvalonQ_Miner1_MAC               "MAC [%s]"                          <text>         (gAvalonQ_Miner1)
+String AvalonQ_Miner1_DNA               "DNA [%s]"                          <text>         (gAvalonQ_Miner1)
+String AvalonQ_Miner1_PoolURL           "Pool [%s]"                         <text>         (gAvalonQ_Miner1)
+
+// -----------------------------------------------------------------------------
+// Raw response cache (optional, useful for troubleshooting)
+// -----------------------------------------------------------------------------
+
+String AvalonQ_Miner1_RawVersion        "Raw Version JSON [%s]"             <code>         (gAvalonQ_Miner1)
+String AvalonQ_Miner1_RawSummary        "Raw Summary JSON [%s]"             <code>         (gAvalonQ_Miner1)
+String AvalonQ_Miner1_RawEstats         "Raw eStats JSON [%s]"              <code>         (gAvalonQ_Miner1)
+String AvalonQ_Miner1_RawPools          "Raw Pools JSON [%s]"               <code>         (gAvalonQ_Miner1)
+
+// -----------------------------------------------------------------------------
+// Manual control items
+// -----------------------------------------------------------------------------
+
+String AvalonQ_Miner1_Workmode_Set      "Set Workmode [%s]"                 <settings>     (gAvalonQ_Miner1)
+Switch AvalonQ_Miner1_Standby_Set       "Standby Command"                   <switch>       (gAvalonQ_Miner1)
+Switch AvalonQ_Miner1_Reboot            "Reboot Miner"                      <switch>       (gAvalonQ_Miner1)
+Number AvalonQ_Miner1_FanSpeed_Set      "Set Fan Speed [%d %%]"             <fan>          (gAvalonQ_Miner1)
+Switch AvalonQ_Miner1_FanAuto_Set       "Fan Auto"                          <fan>          (gAvalonQ_Miner1)
+Switch AvalonQ_Miner1_LCD_Set           "LCD Command"                       <screen>       (gAvalonQ_Miner1)
+
+// -----------------------------------------------------------------------------
+// Load-management items for battery / charger based automation
+// -----------------------------------------------------------------------------
+// These are separate from your existing battery/charger Items. The JS rule
+// reads your real SoC and charger-status Items from its configuration block.
+
+Switch AvalonQ_Miner1_LoadManagement_Enable  "Load Management Enabled"       <battery>      (gAvalonQ_Miner1)
+String AvalonQ_Miner1_LoadDecision           "Load Decision [%s]"            <text>         (gAvalonQ_Miner1)
+Switch AvalonQ_Miner1_PowerRelay_Set         "Power Relay Command"           <switch>       (gAvalonQ_Miner1)

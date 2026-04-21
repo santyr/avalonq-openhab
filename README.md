@@ -82,6 +82,24 @@ Contains:
    - SoC thresholds for standby / eco / standard / super
 4. Reload items and rules.
 
+## Notes for the inspected openHAB environment
+
+From the current openHAB model:
+- battery SoC item: `BatterySoC_Calculated`
+- charging proxy item: `BatteryChargingStatus`
+- charger stage item: `ChargerStatus`
+- existing miner relay item: `Miner_Power`
+- existing miner voltage protection rule: `Miner Voltage Protection`
+
+Important: `Miner_Power` is already tied to an existing miner power path and should not be reused for the Avalon Q.
+
+Recommended approach for this environment:
+- keep the current Bitaxe/legacy miner on `Miner_Power`
+- create a separate smart-plug Thing and linked Item for the Avalon, e.g. `AvalonQ_Miner1_PowerRelay`
+- keep Avalon telemetry/control items under the `AvalonQ_Miner1_` prefix
+- reuse `BatterySoC_Calculated` and `BatteryChargingStatus` as shared upstream power-state inputs
+- if desired, clone the low-voltage protection concept into a dedicated Avalon rule instead of sharing the existing miner rule
+
 ## Battery / charger automation
 
 The example rule file assumes you want miner behavior to follow:

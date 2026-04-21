@@ -42,9 +42,10 @@ const CFG = {
   connectTimeoutMs: 2500,
 
   // External load-management integration.
-  // Replace these with your real openHAB item names.
-  batterySocItem: 'Battery_SOC',
-  chargerActiveItem: 'Charger_Active',
+  // Defaults below match the inspected openHAB environment.
+  // Keep the Avalon relay item separate from any existing Bitaxe/other miner relay.
+  batterySocItem: 'BatterySoC_Calculated',
+  chargerActiveItem: 'BatteryChargingStatus',
   powerRelayItem: 'AvalonQ_Miner1_PowerRelay_Set',
 
   // Enable relay control if the miner is physically powered by a smart relay.
